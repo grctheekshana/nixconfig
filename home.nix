@@ -51,12 +51,18 @@
 
   programs.git = {
     enable = true;
-    userName = "grctheekshana";
-    userEmail = "email.grctheekshana@gmail.com";
-    extraConfig = {
-      init.defaultBranch = "main";
+    settings = {
+      user = {
+        name = "grctheekshana";
+        email = "email.grctheekshana@gmail.com";
+      };
+      init = {
+        defaultBranch = "main";
+      };
+      # Move any other extraConfig items here inside settings
     };
   };
+
 
   programs.waybar = {
     enable = true;
