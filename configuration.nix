@@ -1,12 +1,16 @@
-
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./hardware.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./hardware.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -27,17 +31,17 @@
   services.greetd = {
     enable = true;
     settings = {
-	default_session = {
-	   command = ''
-	     ${pkgs.tuigreet}/bin/tuigreet \
-		--time \
-		--remember \
-		--remember-user-session \
-		--user-menu \
-		--asterisks \
-	   '';
-	   user = "greeter";
-	};
+      default_session = {
+        command = ''
+          	     ${pkgs.tuigreet}/bin/tuigreet \
+          		--time \
+          		--remember \
+          		--remember-user-session \
+          		--user-menu \
+          		--asterisks \
+          	   '';
+        user = "greeter";
+      };
     };
   };
 
@@ -66,18 +70,28 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.chamod = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "input" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "audio"
+      "video"
+      "input"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
   };
-  
+
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     wget
+    gnumake
+    gcc
+    ripgrep
+    fd
     hyprcursor
     xarchiver
     p7zip
@@ -86,21 +100,21 @@
   ];
 
   services.power-profiles-daemon.enable = true;
- 
+
   fonts.packages = with pkgs; [
     font-awesome
     noto-fonts
     nerd-fonts.jetbrains-mono
   ];
-  
+
   programs.thunar = {
     enable = true;
     plugins = with pkgs; [
       thunar-archive-plugin # Right-click "Extract Here"
-      thunar-volman         # Automatic management of removable drives
+      thunar-volman # Automatic management of removable drives
     ];
   };
- 
+
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
 
@@ -115,7 +129,10 @@
 
   virtualisation.vmware.host.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # List services that you want to enable:
 
@@ -153,4 +170,3 @@
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
-

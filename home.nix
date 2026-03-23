@@ -1,21 +1,20 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 
 {
-	home.username = "chamod";
-	home.homeDirectory = "/home/chamod";
-	home.stateVersion = "25.11";
-	programs.bash = {
-		enable = true;
-		shellAliases = {
-			chamod = "echo I use nix btw";
-		};
-	};
-
+  home.username = "chamod";
+  home.homeDirectory = "/home/chamod";
+  home.stateVersion = "25.11";
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      chamod = "echo I use nix btw";
+    };
+  };
 
   # This tells Home Manager to manage your home files
   home.file.".config/hypr" = {
     source = ./dotfiles/hypr; # Relative to this .nix file
-    recursive = true;         # Links the entire directory, not just the folder
+    recursive = true; # Links the entire directory, not just the folder
   };
 
   # You can do the same for other apps
@@ -23,29 +22,30 @@
   home.file.".config/fuzzel".source = ./dotfiles/fuzzel;
   home.file.".config/foot".source = ./dotfiles/foot;
 
-  home.packages =  with pkgs; [
-    # git
+  home.packages = with pkgs; [
     libnotify
     hyprsunset
     hyprshot
     playerctl
     foot
-    # brave
     pavucontrol
-    # libsForQt5.qt5ct
-    # kdePackages.qt6ct
-    # libsForQt5.qtstyleplugin-kvantum
-    # nwg-look
-    # adw-gtk3
     gnome-themes-extra
-    # glib
-    adwaita-icon-theme  # Standard GNOME icons
+    adwaita-icon-theme # Standard GNOME icons
     discord
     telegram-desktop
     heroic
     mpv
     imv
     obs-studio
+    tree-sitter
+    lua-language-server # Lua
+    nixd # Nix
+    bash-language-server # Bash
+
+    stylua # Lua formatter
+    nixfmt # Nix formatter
+    shfmt # Bash formatter
+
     # Add more packages here
   ];
 
@@ -62,7 +62,6 @@
       # Move any other extraConfig items here inside settings
     };
   };
-
 
   programs.waybar = {
     enable = true;
@@ -83,13 +82,12 @@
   programs.hyprlock.enable = true;
   programs.neovim.enable = true;
   programs.btop.enable = true;
-  
+
   qt = {
     enable = true;
     platformTheme.name = "gtk";
-    style.name = "Adwaita-dark"; 
-  }; 
-
+    style.name = "Adwaita-dark";
+  };
 
   gtk = {
     enable = true;
@@ -97,6 +95,7 @@
       name = "adw-gtk3-dark";
       package = pkgs.adw-gtk3;
     };
+    gtk4.theme = null; # use GTK4's built-in Adwaita
   };
 
   dconf.settings = {
