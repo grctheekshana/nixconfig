@@ -11,6 +11,18 @@
 		};
 	};
 
+
+  # This tells Home Manager to manage your home files
+  home.file.".config/hypr" = {
+    source = ./dotfiles/hypr; # Relative to this .nix file
+    recursive = true;         # Links the entire directory, not just the folder
+  };
+
+  # You can do the same for other apps
+  home.file.".config/waybar".source = ./dotfiles/waybar;
+  home.file.".config/fuzzel".source = ./dotfiles/fuzzel;
+  home.file.".config/foot".source = ./dotfiles/foot;
+
   home.packages =  with pkgs; [
     git
     libnotify
