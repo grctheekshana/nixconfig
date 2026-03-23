@@ -24,7 +24,7 @@
   home.file.".config/foot".source = ./dotfiles/foot;
 
   home.packages =  with pkgs; [
-    git
+    # git
     libnotify
     hyprsunset
     hyprshot
@@ -48,6 +48,15 @@
     obs-studio
     # Add more packages here
   ];
+
+  programs.git = {
+    enable = true;
+    userName = "grctheekshana";
+    userEmail = "email.grctheekshana@gmail.com";
+    extraConfig = {
+      init.defaultBranch = "main";
+    };
+  };
 
   programs.waybar = {
     enable = true;
