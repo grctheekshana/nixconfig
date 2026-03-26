@@ -22,9 +22,9 @@
   home.file.".config/fuzzel".source = ./dotfiles/fuzzel;
   home.file.".config/foot".source = ./dotfiles/foot;
 
-  home.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = "gtk3";
-  };
+  # home.sessionVariables = {
+  #   QT_QPA_PLATFORMTHEME = "gtk3";
+  # };
 
   home.packages = with pkgs; [
     libnotify
@@ -42,6 +42,7 @@
     mpv
     imv
     obs-studio
+
     tree-sitter
     lua-language-server # Lua
     nixd # Nix
@@ -50,10 +51,6 @@
     stylua # Lua formatter
     nixfmt # Nix formatter
     shfmt # Bash formatter
-
-    # quickshell
-    qt6.qtwayland
-    qt6.qtdeclarative # provides both qmlls and qmlformat
 
     # Add more packages here
   ];
@@ -85,7 +82,6 @@
 
   programs.firefox.enable = true;
 
-  #services.waybar.enable = true;
   services.hypridle.enable = true;
   services.mako = {
     enable = true;
