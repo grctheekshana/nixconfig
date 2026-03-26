@@ -22,6 +22,10 @@
   home.file.".config/fuzzel".source = ./dotfiles/fuzzel;
   home.file.".config/foot".source = ./dotfiles/foot;
 
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "gtk3";
+  };
+
   home.packages = with pkgs; [
     libnotify
     hyprsunset
@@ -34,6 +38,7 @@
     discord
     telegram-desktop
     heroic
+    mangohud
     mpv
     imv
     obs-studio
@@ -45,6 +50,10 @@
     stylua # Lua formatter
     nixfmt # Nix formatter
     shfmt # Bash formatter
+
+    # quickshell
+    qt6.qtwayland
+    qt6.qtdeclarative # provides both qmlls and qmlformat
 
     # Add more packages here
   ];
@@ -68,6 +77,12 @@
     systemd.enable = true; # Ensures the service is managed by systemd
   };
 
+  # programs.quickshell = {
+  #   enable = true;
+  #   # Optional: Ensure it has systemd integration enabled
+  #   systemd.enable = true;
+  # };
+
   programs.firefox.enable = true;
 
   #services.waybar.enable = true;
@@ -85,8 +100,8 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
-    style.name = "Adwaita-dark";
+    platformTheme.name = "gtk3";
+    style.name = "adw-gtk3-dark";
   };
 
   gtk = {

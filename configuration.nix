@@ -76,6 +76,7 @@
       "audio"
       "video"
       "input"
+      "gamemode"
     ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
@@ -97,6 +98,8 @@
     p7zip
     unzip
     gnutar
+    lmstudio
+    qt6.qt5compat
   ];
 
   services.power-profiles-daemon.enable = true;
@@ -125,9 +128,25 @@
   };
   hardware.steam-hardware.enable = true;
 
+  programs.gamemode.enable = true;
+
   security.polkit.enable = true;
 
   virtualisation.vmware.host.enable = true;
+
+  # This enables the graphical 'subsystem' (not necessarily X11 itself)
+  services.xserver.enable = true;
+
+  # Enable GNOME and GDM
+  # services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  # Force GDM to use Wayland
+  # services.xserver.displayManager.gdm.wayland = true;
+
+  # Optional: Ensure electron apps and browsers use Wayland natively
+  # This prevents them from starting XWayland in the background
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   nix.settings.experimental-features = [
     "nix-command"
