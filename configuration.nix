@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -75,6 +76,7 @@
       "video"
       "input"
       "gamemode"
+      "libvirtd"
     ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
@@ -93,7 +95,7 @@
     fd
     hyprcursor
 
-    mate.engrampa
+    engrampa
     zip
     p7zip
     unzip
@@ -101,9 +103,17 @@
     unrar
 
     lmstudio
+
   ];
 
   services.power-profiles-daemon.enable = true;
+
+  # programs.firefox = {
+  #  enable = true;
+  #    profile.chamod = {
+  #      isDefault = true;
+  #    };
+  # };
 
   fonts.packages = with pkgs; [
     font-awesome
@@ -133,12 +143,60 @@
 
   security.polkit.enable = true;
 
-  virtualisation.vmware.host.enable = true;
+  # --------------------Virtualization(QEMU/KVM with virtmanager)------------------------------
+  virtualisation.libvirtd = {
+    enable = true;
+    # qemu.swtpm.enable = true;
+  };
+
+  programs.virt-manager.enable = true;
+  services.spice-vdagentd.enable = true;
 
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+
+  programs.dconf.enable = true;
+
+  # ----------------------Stylix(for themeing)---------------------------
+  stylix = {
+    enable = true;
+    polarity = "dark";
+    # Set a static image for the background/lockscreen
+    image = ./wallpapers/wallpaper.jpg;
+
+    # 3. This overrides wallpaper color-syncing with a static theme
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+
+    # Global font settings (replaces your current manual font declarations)
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.noto-fonts;
+        name = "Noto Sans";
+      };
+    };
+
+    icons = {
+      enable = true;
+      package = pkgs.papirus-icon-theme;
+      dark = "Papirus-Dark";
+      light = "Papirus-Light";
+    };
+
+    # Set cursor size/theme globally
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 20;
+    };
+    targets.console.enable = false;
+
+  };
 
   # List services that you want to enable:
 
