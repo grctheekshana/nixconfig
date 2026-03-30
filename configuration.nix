@@ -198,6 +198,14 @@
 
   };
 
+  # -----------------Garbage collection & optimizations-----------
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
