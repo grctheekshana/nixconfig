@@ -101,6 +101,7 @@
     unzip
     gnutar
     unrar
+    virt-viewer
 
     lmstudio
 
