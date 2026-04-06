@@ -8,6 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -29,6 +33,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
               users.chamod = {
                 imports = [ ./home.nix ];
               };

@@ -220,7 +220,8 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "zen-browser": "zen-browser"
       }
     },
     "stylix": {
@@ -348,6 +349,26 @@
       "original": {
         "owner": "tinted-theming",
         "repo": "base16-zed",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775277437,
+        "narHash": "sha256-zCi04nIBNwTMt8n35w9cBgNUqnyhbjivsGlx6/Qhqug=",
+        "owner": "youwen5",
+        "repo": "zen-browser-flake",
+        "rev": "de6d9094822a8f87fc380d1638f34d6cc6fa68ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "youwen5",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }

@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   home.username = "chamod";
@@ -152,7 +157,7 @@
     shfmt # Bash formatter
 
     yazi
-
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     # Add more packages here
   ];
 
